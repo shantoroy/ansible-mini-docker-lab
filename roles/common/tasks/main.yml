@@ -1,0 +1,18 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install required packages
+  apt:
+    name:
+      - curl
+      - git
+      - htop
+    state: present
+
+- name: Ensure NTP is installed and running
+  apt:
+    name: ntp
+    state: present
+  notify: Restart NTP

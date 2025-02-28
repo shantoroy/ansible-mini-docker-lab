@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  control:
+    image: ubuntu:22.04
+    container_name: ansible-control
+    volumes:
+      - .:/ansible
+    working_dir: /ansible
+    command: sleep infinity
+    networks:
+      - ansible-net
+
+  node1:
+    image: ubuntu:22.04
+    container_name: ansible-node1
+    command: sleep infinity
+    volumes:
+      - ./id_rsa.pub:/root/.ssh/authorized_keys
+    networks:
+      - ansible-net
+
+  node2:
+    image: ubuntu:22.04
+    container_name: ansible-node2
+    command: sleep infinity
+    volumes:
+      - ./id_rsa.pub:/root/.ssh/authorized_keys
+    networks:
+      - ansible-net
+
+networks:
+  ansible-net:
+    driver: bridge
