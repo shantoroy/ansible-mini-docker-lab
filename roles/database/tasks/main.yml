@@ -1,0 +1,25 @@
+# roles/database/tasks/main.yml
+---
+- name: Install MySQL
+  apt:
+    name: mysql-server
+    state: present
+    update_cache: yes
+
+- name: Configure MySQL
+  template:
+    src: my.cnf.j2
+    dest: /etc/mysql/my.cnf
+  notify: restart mysql
+
+- name: Start and enable MySQL
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+
+- name: Create demo database
+  mysql_db:
+    name: demo
+    state: present
+  ignore_errors: yes

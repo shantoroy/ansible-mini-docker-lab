@@ -1,5 +1,4 @@
+# roles/common/handlers/main.yml
 ---
-- name: Restart NTP
-  service:
-    name: ntp
-    state: restarted
+- name: restart sysctl
+  command: sysctl -p

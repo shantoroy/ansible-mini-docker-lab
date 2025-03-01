@@ -1,0 +1,8 @@
+# playbooks/database.yml
+---
+- name: Configure database servers
+  hosts: dbservers
+  become: yes
+  roles:
+    - common
+    - database

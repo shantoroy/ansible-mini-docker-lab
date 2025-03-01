@@ -1,0 +1,31 @@
+# playbooks/security.yml
+---
+- name: Apply security hardening to all hosts
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update all packages
+      apt:
+        update_cache: yes
+        upgrade: yes
+      tags: security
+
+    - name: Install security packages
+      apt:
+        name:
+          - fail2ban
+          - ufw
+        state: present
+      tags: security
+
+    - name: Configure UFW
+      ufw:
+        state: enabled
+        policy: deny
+      tags: security
+
+    - name: Allow SSH through UFW
+      ufw:
+        rule: allow
+        port: ssh
+      tags: security

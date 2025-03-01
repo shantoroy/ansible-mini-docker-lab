@@ -1,0 +1,21 @@
+# Dockerfile.ansible
+FROM ubuntu:22.04
+
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    apt-add-repository --yes --update ppa:ansible/ansible && \
+    apt-get install -y ansible openssh-client python3-pip && \
+    pip3 install pywinrm && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set up SSH for passwordless authentication
+RUN mkdir -p /root/.ssh
+COPY id_rsa /root/.ssh/id_rsa
+COPY id_rsa.pub /root/.ssh/id_rsa.pub
+RUN chmod 600 /root/.ssh/id_rsa && \
+    chmod 644 /root/.ssh/id_rsa.pub
+
+WORKDIR /ansible
+
+CMD ["tail", "-f", "/dev/null"]
