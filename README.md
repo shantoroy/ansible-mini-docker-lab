@@ -1,6 +1,6 @@
 # Ansible Docker Demo
 
-This project demonstrates Ansible configuration management in a local Docker environment, featuring one Ansible control node and two managed nodes.
+This project demonstrates Ansible configuration management using Docker containers. It consists of one Ansible control node and two managed nodes, all running in Docker containers orchestrated with Docker Compose.
 
 ## Prerequisites
 
@@ -11,7 +11,7 @@ This project demonstrates Ansible configuration management in a local Docker env
 
 1. Clone this repository
    ```bash
-   git clone https://github.com/yourusername/ansible-docker-mini-lab.git
+   git clone https://github.com/shantoroy/ansible-docker-mini-lab.git
    cd ansible-docker-demo
    ```
 
